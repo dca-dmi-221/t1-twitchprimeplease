@@ -1,6 +1,109 @@
+//Esta página será usada para tener ejemplos y cosas de lo que usaré al final
+//todo lo relacionado con botones, hecho con christian :D
+class Boton {
+
+  constructor(x,y){
+    this._x = x
+    this._y = y;
+    this._bWeight = 20;
+    this._bHeight = 20;
+    this._r = 150;
+    this._g = 150;
+    this._b = 150;
+    this.underPressured = false;
+  }
+
+  show(){
+    //console.log("a")
+
+    if (this.underPressured) {
+      this._r = 0;
+    }else if (!this.underPressured) {
+      this._r = 150;
+    }
+    
+    fill(this._r,this._g,this._b);
+    rect(this._x, this._y, this._bWeight, this._bHeight);
+    noFill();
+  }
+
+  action(){
+    if (mouseX>this._x && mouseX<this._x+this._bWeight && mouseY>this._y && mouseY < this._y + height){
+      this.underPressured = true;
+    } else {
+      this.underPressured = false;
+    }
+  }
+
+  accionar (array,index){
+    
+  }
+
+}
+
+class Play extends Boton {
+
+  constructor(x,y){
+    super(x,y)
+    this._b = 255
+  }
+  accionar (array,index){
+
+    if(this.underPressured){
+      array[index].play()
+    }
+  }
+}
+
+class Pause extends Boton {
+  constructor(x,y){
+    super(x,y)
+    this._b = 210
+  }
+  accionar (array,index){
+
+    if(this.underPressured){
+      array[index].pause()
+    }
+  }
+}
+
+class Next extends Boton {
+
+  constructor(x,y){
+    super(x,y)
+    this._b = 160
+  }
+  accionar (array,index){
+    //jumpSong('next');
+  }
+}
+
+class Prev extends Boton {
+  constructor(x,y){
+    super(x,y)
+    this._b = 90
+  }
+
+  accionar (array,index){
+    //jumpSong('prev');
+  }
+}
+
+class Stop extends Boton {
+
+  constructor(x,y){
+    super(x,y)
+    this._b = 0
+  }
+  accionar (array,index){
+    if(this.underPressured){
+      array[index].stop()
+    }
+  }
+}
 
 // hecho gracias a la mano de nuestro señor Daniel, el monitor de los martes.
-//Esta página será usada para tener ejemplos y cosas de lo que usaré al final
 
 const input = document.querySelector('input');
 
@@ -32,13 +135,38 @@ function preload() {
   ];
 }
 
+//bottoms
+let botones = []
+let play = new Play(250,300);
+botones.push(play);
+
+let pause = new Pause (280,300);
+botones.push(pause);
+
+let next = new Next(310,300);
+botones.push(next);
+
+let prev = new Prev(220,300);
+botones.push(prev);
+
+let stop = new Stop(190,300);
+botones.push(stop)
+
 function setup() {
-  let cnv = createCanvas(200, 200);
-  background(0);
+  let cnv = createCanvas(1439, 732);
+  background(255);
 }
 
 function draw() {
   ellipse(200, 200, 100, 100);
+  botones.forEach(elemento =>{
+
+    elemento.show()
+
+  })
+
+  
+
 }
 
 function keyPressed() {
@@ -71,7 +199,7 @@ function keyPressed() {
 }
 
 function jumpSong(mode) {
-  console.log(currentSoundIndex);
+  //console.log(currentSoundIndex);
   let jumper = 1;
   let verify = false;
   if (mode === 'next') {
@@ -83,7 +211,7 @@ function jumpSong(mode) {
   }
 
   if (verify) {
-    console.log('aaaa')
+    //console.log('aaaa')
     mySound[currentSoundIndex].stop();
     currentSoundIndex += jumper;
   } else {
@@ -92,4 +220,27 @@ function jumpSong(mode) {
   }
 }
 
-//hasta qui lo hecho con Daniel
+//hasta aqui lo hecho con Daniel
+
+function mousePressed(){
+  botones.forEach(elemento =>{
+
+    elemento.action();
+    elemento.accionar (mySound,currentSoundIndex);
+
+    
+  })
+  
+
+
+}
+
+function mouseReleased(){
+
+  botones.forEach(elemento =>{
+
+    elemento.underPressured = false;
+
+  })
+
+}
