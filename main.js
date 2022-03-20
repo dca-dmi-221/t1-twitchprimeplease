@@ -1,4 +1,33 @@
 //Esta página será usada para tener ejemplos y cosas de lo que usaré al final
+class Song{
+  constructor(){
+    this.nombre = nombre ="No hay información";
+    this.duración  = duracion = "No hay información";
+    this.artista  = artista = "No hay información";
+    this.album  = album = "No hay información";
+    this.genero  = genero = "No hay información";
+    this.publicationYear  = publicationYear = "No hay información";
+    this.archivo  = archivo = "No hay información";
+    this.nombreDeArchivo  = nombreDeArchivo ="No hay información";
+  }
+
+  createSong(n,d,ar,al,g,y,arc,nda){
+    return {
+      nombre: n,
+      duracion: d,
+      artista: ar,
+      album: al,
+      genero: g,
+      publicationYear: y,
+      archivo: arc,
+      nombreDeArchivo: nda
+
+
+    }
+  }
+
+}
+
 //todo lo relacionado con botones, hecho con christian :D
 class Boton {
 
@@ -103,6 +132,24 @@ class Stop extends Boton {
   }
 }
 
+class Texto{
+  constructor(x,y){
+    this._x = x;
+    this._y = y;
+  }
+
+  show(texto,size){
+    fill(0)
+    textAlign(CENTER);
+    textSize(size)
+    text(texto,this._x,this._y)
+    textAlign(RIGHT);
+    textSize(12);
+    noFill()
+
+  }
+}
+
 // hecho gracias a la mano de nuestro señor Daniel, el monitor de los martes.
 
 const input = document.querySelector('input');
@@ -137,20 +184,23 @@ function preload() {
 
 //bottoms
 let botones = []
-let play = new Play(250,300);
+let play = new Play(720,650);
 botones.push(play);
 
-let pause = new Pause (280,300);
+let pause = new Pause (750,650);
 botones.push(pause);
 
-let next = new Next(310,300);
+let next = new Next(780,650);
 botones.push(next);
 
-let prev = new Prev(220,300);
+let prev = new Prev(660,650);
 botones.push(prev);
 
-let stop = new Stop(190,300);
+let stop = new Stop(690,650);
 botones.push(stop)
+
+//texto
+let reproduciendo = new Texto (720,600)
 
 function setup() {
   let cnv = createCanvas(1439, 732);
@@ -164,7 +214,7 @@ function draw() {
     elemento.show()
 
   })
-
+  reproduciendo.show(currentSoundIndex,20)
   
 
 }
