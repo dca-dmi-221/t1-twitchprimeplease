@@ -1,29 +1,14 @@
 //Esta página será usada para tener ejemplos y cosas de lo que usaré al final
 class Song{
   constructor(){
-    this.nombre = nombre ="No hay información";
-    this.duración  = duracion = "No hay información";
-    this.artista  = artista = "No hay información";
-    this.album  = album = "No hay información";
-    this.genero  = genero = "No hay información";
-    this.publicationYear  = publicationYear = "No hay información";
-    this.archivo  = archivo = "No hay información";
-    this.nombreDeArchivo  = nombreDeArchivo ="No hay información";
-  }
-
-  createSong(n,d,ar,al,g,y,arc,nda){
-    return {
-      nombre: n,
-      duracion: d,
-      artista: ar,
-      album: al,
-      genero: g,
-      publicationYear: y,
-      archivo: arc,
-      nombreDeArchivo: nda
-
-
-    }
+    this.nombre = nombre
+    this.duración  = duracion
+    this.artista  = artista
+    this.album  = album
+    this.genero  = genero
+    this.publicationYear  = publicationYear
+    this.archivo  = archivo
+    this.nombreDeArchivo  = nombreDeArchivo
   }
 
 }
