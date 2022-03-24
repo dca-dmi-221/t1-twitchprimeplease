@@ -1,140 +1,3 @@
-//Esta página será usada para tener ejemplos y cosas de lo que usaré al final
-class Song{
-  constructor(){
-    this.nombre = nombre
-    this.duración  = duracion
-    this.artista  = artista
-    this.album  = album
-    this.genero  = genero
-    this.publicationYear  = publicationYear
-    this.archivo  = archivo
-    this.nombreDeArchivo  = nombreDeArchivo
-  }
-
-}
-
-//todo lo relacionado con botones, hecho con christian :D
-class Boton {
-
-  constructor(x,y){
-    this._x = x
-    this._y = y;
-    this._bWeight = 20;
-    this._bHeight = 20;
-    this._r = 150;
-    this._g = 150;
-    this._b = 150;
-    this.underPressured = false;
-  }
-
-  show(){
-    //console.log("a")
-
-    if (this.underPressured) {
-      this._r = 0;
-    }else if (!this.underPressured) {
-      this._r = 150;
-    }
-    
-    fill(this._r,this._g,this._b);
-    rect(this._x, this._y, this._bWeight, this._bHeight);
-    noFill();
-  }
-
-  action(){
-    if (mouseX>this._x && mouseX<this._x+this._bWeight && mouseY>this._y && mouseY < this._y + height){
-      this.underPressured = true;
-    } else {
-      this.underPressured = false;
-    }
-  }
-
-  accionar (array,index){
-    
-  }
-
-}
-
-class Play extends Boton {
-
-  constructor(x,y){
-    super(x,y)
-    this._b = 255
-  }
-  accionar (array,index){
-
-    if(this.underPressured){
-      array[index].play()
-    }
-  }
-}
-
-class Pause extends Boton {
-  constructor(x,y){
-    super(x,y)
-    this._b = 210
-  }
-  accionar (array,index){
-
-    if(this.underPressured){
-      array[index].pause()
-    }
-  }
-}
-
-class Next extends Boton {
-
-  constructor(x,y){
-    super(x,y)
-    this._b = 160
-  }
-  accionar (array,index){
-    //jumpSong('next');
-  }
-}
-
-class Prev extends Boton {
-  constructor(x,y){
-    super(x,y)
-    this._b = 90
-  }
-
-  accionar (array,index){
-    //jumpSong('prev');
-  }
-}
-
-class Stop extends Boton {
-
-  constructor(x,y){
-    super(x,y)
-    this._b = 0
-  }
-  accionar (array,index){
-    if(this.underPressured){
-      array[index].stop()
-    }
-  }
-}
-
-class Texto{
-  constructor(x,y){
-    this._x = x;
-    this._y = y;
-  }
-
-  show(texto,size){
-    fill(0)
-    textAlign(CENTER);
-    textSize(size)
-    text(texto,this._x,this._y)
-    textAlign(RIGHT);
-    textSize(12);
-    noFill()
-
-  }
-}
-
 // hecho gracias a la mano de nuestro señor Daniel, el monitor de los martes.
 
 const input = document.querySelector('input');
@@ -184,6 +47,9 @@ botones.push(prev);
 let stop = new Stop(690,650);
 botones.push(stop)
 
+//variable Volumen
+let volumen = 1
+
 //texto
 let reproduciendo = new Texto (720,600)
 
@@ -193,10 +59,11 @@ function setup() {
 }
 
 function draw() {
+  
   ellipse(200, 200, 100, 100);
   botones.forEach(elemento =>{
 
-    elemento.show()
+    elemento.show();
 
   })
   reproduciendo.show(currentSoundIndex,20)
