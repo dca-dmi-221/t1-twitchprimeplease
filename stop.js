@@ -8,7 +8,7 @@ class Stop extends Boton {
     }
     accionar (array,index){
       if(this.underPressured){
-        array[index].stop()
+        array[index].data.stop()
       }
     }
   }

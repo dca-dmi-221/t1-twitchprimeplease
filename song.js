@@ -1,12 +1,13 @@
 class Song{
-    constructor(){
+    constructor(nombre, artista,album,genero, publicationYear, data,nombreDeArchivo){
     this.nombre = nombre
-    this.duración  = duracion
+    
     this.artista  = artista
     this.album  = album
     this.genero  = genero
     this.publicationYear  = publicationYear
-    this.archivo  = archivo
+    this.data  = data
+    this.duracion  = data.duration()/60
     this.nombreDeArchivo  = nombreDeArchivo
     }
 }

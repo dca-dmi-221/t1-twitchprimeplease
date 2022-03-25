@@ -11,7 +11,7 @@ class Next extends Boton {
         console.log("next 😍");
         //jumpSong('prev');
         jumpSong('next');
-        array[index].play();
+        array[index].data.play();
       };
     }
   }

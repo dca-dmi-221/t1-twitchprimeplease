@@ -24,9 +24,10 @@ let currentSoundIndex = 0;
 //Must be called just like above
 function preload() {
   soundFormats('mp3', 'ogg');
+  //Cambios en como se maneja Song hechos con Cristian :D
   mySound = [
-    loadSound('./sounds/sound.mp3'),
-    loadSound('./sounds/sound2.mp3'), 
+    new Song ("Feeling Good", "Michael Buble", "It's Time","Pop",2001,loadSound('./sounds/Feeling_Good.mp3'),"xdd"),
+    new Song ("Boy like you", "Kesha", "x","x",2001,loadSound('./sounds/Boy_like_you.mp3'),"xdd")
   ];
 }
 

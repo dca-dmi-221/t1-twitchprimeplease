@@ -10,7 +10,7 @@ class Play extends Boton {
     accionar (array,index){
   
       if(this.underPressured){
-        array[index].play()
+        array[index].data.play()
       }
     }
   }

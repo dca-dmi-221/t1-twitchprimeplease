@@ -11,7 +11,7 @@ class Prev extends Boton {
         console.log("prev 😭");
         //jumpSong('prev');
         jumpSong('prev');
-        array[index].play();
+        array[index].data.play();
       }
     }
   }
