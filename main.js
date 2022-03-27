@@ -6,7 +6,7 @@ console.log(input)
 input.addEventListener('input', e => {
   let file = e.target.files[0];
   const soundFile = new p5.SoundFile(file);
-  mySound.push(soundFile)
+  defaultPlaylist.push(soundFile)
 })
 
 function createObjectURL(file) {
@@ -19,15 +19,16 @@ function createObjectURL(file) {
   }
 }
 
-let mySound = [];
+let defaultPlaylist = [];
 let currentSoundIndex = 0;
 //Must be called just like above
 function preload() {
   soundFormats('mp3', 'ogg');
   //Cambios en como se maneja Song hechos con Cristian :D
-  mySound = [
-    new Song ("Feeling Good", "Michael Buble", "It's Time","Pop",2001,loadSound('./sounds/Feeling_Good.mp3'),"xdd"),
-    new Song ("Boy like you", "Kesha", "x","x",2001,loadSound('./sounds/Boy_like_you.mp3'),"xdd")
+  defaultPlaylist = [
+    new Song ("Feeling Good", "Michael Buble", "It's Time","Pop",2005,loadSound('./sounds/Feeling_Good.mp3'),"Feeling_Good.mp3"),
+    new Song ("Boy like you", "Ashley Tisdale", " ","Nightcore",2001,loadSound('./sounds/Boy_like_you.mp3'),"Boy_like_you.mp3"),
+    new Song ("Rol Playing Game", "mafumafu", "Vocaloid", "Rol Playing Game - Ep", 2017, loadSound ('./sounds/RPG.mp3'))
   ];
 }
 
@@ -49,7 +50,7 @@ let stop = new Stop(690,650);
 botones.push(stop)
 
 //variable Volumen
-let volumen = 1
+let volumen = 0.5;
 
 //texto
 let reproduciendo = new Texto (720,600)
@@ -67,7 +68,7 @@ function draw() {
     elemento.show();
 
   })
-  reproduciendo.show(currentSoundIndex,20)
+  reproduciendo.show(defaultPlaylist[currentSoundIndex].nombre,20,)
   
 
 }
@@ -77,26 +78,26 @@ function keyPressed() {
     case 39:
       //arrow right
       jumpSong('next');
-      mySound[currentSoundIndex].play();
+      defaultPlaylist[currentSoundIndex].data.play().setVolume(volumen);
       break;
     case 37:
       //arrow left
       jumpSong('prev');
-      mySound[currentSoundIndex].play();
+      defaultPlaylist[currentSoundIndex].data.play().setVolume(volumen);
       break;
     case 32:
       //space bar
-      if (mySound[currentSoundIndex].isPlaying()) {
-        mySound[currentSoundIndex].pause();
+      if (defaultPlaylist[currentSoundIndex].data.isPlaying()) {
+        defaultPlaylist[currentSoundIndex].data.pause().setVolume(volumen);
         background(255, 0, 0);
       } else {
-        mySound[currentSoundIndex].play();
+        defaultPlaylist[currentSoundIndex].data.play().setVolume(volumen);
         background(0, 255, 0);
       }
       break;
     case 82:
       //r key
-      mySound[currentSoundIndex].jump(25);
+      defaultPlaylist[currentSoundIndex].data.jump(25);
       break;
   }
 }
@@ -107,7 +108,7 @@ function jumpSong(mode) {
   let verify = false;
   if (mode === 'next') {
     jumper = 1;
-    verify = currentSoundIndex + 1 < mySound.length
+    verify = currentSoundIndex + 1 < defaultPlaylist.length
   } else if (mode === 'prev') {
     jumper = -1;
     verify = currentSoundIndex - 1 > 0
@@ -115,10 +116,10 @@ function jumpSong(mode) {
 
   if (verify) {
     //console.log('aaaa')
-    mySound[currentSoundIndex].stop();
+    defaultPlaylist[currentSoundIndex].data.stop();
     currentSoundIndex += jumper;
   } else {
-    mySound[currentSoundIndex].stop();
+    defaultPlaylist[currentSoundIndex].data.stop();
     currentSoundIndex = 0;
   }
 }
@@ -129,7 +130,7 @@ function mousePressed(){
   botones.forEach(elemento =>{
 
     elemento.action();
-    elemento.accionar (mySound,currentSoundIndex);
+    elemento.accionar (defaultPlaylist,currentSoundIndex);
 
     
   })
