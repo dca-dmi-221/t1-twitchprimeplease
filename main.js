@@ -68,6 +68,10 @@ function draw() {
     elemento.show();
 
   })
+  for (let i = 0; i < defaultPlaylist.length; i++) {
+    defaultPlaylist[i].showInList(700,100 + (20*i))
+    
+  }
   reproduciendo.show(defaultPlaylist[currentSoundIndex].nombre,20,)
   
 
@@ -134,6 +138,8 @@ function mousePressed(){
 
     
   })
+
+  defaultPlaylist.accionar()
   
 
 

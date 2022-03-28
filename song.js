@@ -1,7 +1,6 @@
 class Song{
     constructor(nombre, artista,album,genero, publicationYear, data,nombreDeArchivo){
     this.nombre = nombre
-    
     this.artista  = artista
     this.album  = album
     this.genero  = genero
@@ -9,5 +8,32 @@ class Song{
     this.data  = data
     this.duracion  = data.duration()/60
     this.nombreDeArchivo  = nombreDeArchivo
+    this.underPressured = false;
+    this.x = x
+    this.y = y
+    }
+
+    showInList(x,y){
+        if(this.underPressured){
+            fill(242, 46, 62)
+        } else {
+            fill(89, 18, 31)
+        }
+        textFill(0);
+        rect(x,y,150,20)
+        textAlign(CENTER);
+        text(this.nombre,x,y)
+        text(this.artista,x + 20,y, x+ 39)
+        text(this.album,x + 40,y, x+ 59)
+        text(this.genero,x + 60,y, x + 79)
+        text(this.publicationYear,x + 80, y, x + 99)
+        text(this.duracion, x + 100, y,x + 119)
+        textAlign(RIGHT);
+    }
+
+    accionar (array,index){
+        if(this.underPressured){
+        array[index].data.play()
+        }
     }
 }
