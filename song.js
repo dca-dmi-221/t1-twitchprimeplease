@@ -9,18 +9,11 @@ class Song{
     this.duracion  = data.duration()/60
     this.nombreDeArchivo  = nombreDeArchivo
     this.underPressured = false;
-    this.x = x
-    this.y = y
     }
 
-    showInList(x,y){
-        if(this.underPressured){
-            fill(242, 46, 62)
-        } else {
-            fill(89, 18, 31)
-        }
+    show(){
         textFill(0);
-        rect(x,y,150,20)
+        rect(this.x,this.y,150,20)
         textAlign(CENTER);
         text(this.nombre,x,y)
         text(this.artista,x + 20,y, x+ 39)
@@ -31,9 +24,9 @@ class Song{
         textAlign(RIGHT);
     }
 
-    accionar (array,index){
-        if(this.underPressured){
-        array[index].data.play()
-        }
+    validateClick(mx,my){
+
+        return (mx < this.x && my < this.y && mx < this.x + 700 && my < this.y + 50)
+
     }
 }

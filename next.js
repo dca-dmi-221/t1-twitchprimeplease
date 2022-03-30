@@ -10,8 +10,10 @@ class Next extends Boton {
       if(this.underPressured){
         console.log("next 😍");
         //jumpSong('prev');
+        // array[index].data.stop();
         jumpSong('next');
-        array[index].data.play();
+
+        array[currentSoundIndex].data.play();
       };
     }
   }

@@ -9,7 +9,7 @@ class Pause extends Boton {
   
       if(this.underPressured){
         console.log("🥶");
-        array[index].data.pause()
+        array[currentSoundIndex].data.pause()
       }
     }
   }

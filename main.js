@@ -26,8 +26,8 @@ function preload() {
   soundFormats('mp3', 'ogg');
   //Cambios en como se maneja Song hechos con Cristian :D
   defaultPlaylist = [
-    new Song ("Feeling Good", "Michael Buble", "It's Time","Pop",2005,loadSound('./sounds/Feeling_Good.mp3'),"Feeling_Good.mp3"),
-    new Song ("Boy like you", "Ashley Tisdale", " ","Nightcore",2001,loadSound('./sounds/Boy_like_you.mp3'),"Boy_like_you.mp3"),
+    new Song ("Feeling Good", "Michael Buble", "It's Time","Pop", 2005,loadSound('./sounds/Feeling_Good.mp3'),"Feeling_Good.mp3"),
+    new Song ("Boy like you", "Ashley Tisdale", " ","Nightcore", 2001, loadSound('./sounds/Boy_like_you.mp3'),"Boy_like_you.mp3"),
     new Song ("Rol Playing Game", "mafumafu", "Vocaloid", "Rol Playing Game - Ep", 2017, loadSound ('./sounds/RPG.mp3'))
   ];
 }
@@ -57,22 +57,19 @@ let reproduciendo = new Texto (720,600)
 
 function setup() {
   let cnv = createCanvas(1439, 732);
-  background(255);
+
 }
 
 function draw() {
-  
+  background(255);
   ellipse(200, 200, 100, 100);
   botones.forEach(elemento =>{
 
     elemento.show();
 
   })
-  for (let i = 0; i < defaultPlaylist.length; i++) {
-    defaultPlaylist[i].showInList(700,100 + (20*i))
-    
-  }
-  reproduciendo.show(defaultPlaylist[currentSoundIndex].nombre,20,)
+
+  reproduciendo.show(defaultPlaylist[currentSoundIndex].nombre,20)
   
 
 }
@@ -85,7 +82,7 @@ function keyPressed() {
       defaultPlaylist[currentSoundIndex].data.play().setVolume(volumen);
       break;
     case 37:
-      //arrow left
+      //arrow leftx
       jumpSong('prev');
       defaultPlaylist[currentSoundIndex].data.play().setVolume(volumen);
       break;
@@ -95,7 +92,7 @@ function keyPressed() {
         defaultPlaylist[currentSoundIndex].data.pause().setVolume(volumen);
         background(255, 0, 0);
       } else {
-        defaultPlaylist[currentSoundIndex].data.play().setVolume(volumen);
+        //defaultPlaylist[currentSoundIndex].data.play().setVolume(volumen);
         background(0, 255, 0);
       }
       break;
@@ -119,7 +116,8 @@ function jumpSong(mode) {
   }
 
   if (verify) {
-    //console.log('aaaa')
+    console.log('aaaa')
+    
     defaultPlaylist[currentSoundIndex].data.stop();
     currentSoundIndex += jumper;
   } else {
@@ -139,7 +137,7 @@ function mousePressed(){
     
   })
 
-  defaultPlaylist.accionar()
+  // defaultPlaylist.accionar()
   
 
 
