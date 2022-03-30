@@ -54,9 +54,48 @@ let volumen = 0.5;
 
 //texto
 let reproduciendo = new Texto (720,600)
+let reproduciendoArtista = new Texto (720, 630)
+let listaDeReproduccion = new Texto (720, 100)
+
+//playlist
+
+let playlist0 = [];
+let playlist1Raw = [];
+let playlist1 = [];
+let playlist2Raw = [];
+let playlist2 = [];
+let playlist3Raw = [];
+let playlist3 = [];
+
+let currentPlaylist = playlist0;
 
 function setup() {
-  let cnv = createCanvas(1439, 732);
+  let cnv = createCanvas(1440, 730);
+  let x = 800;
+  let y = 100;
+  for (let i = 0; i < defaultPlaylist.length; i++) {
+    //playlist0.push(new SongTileViewManager(defaultPlaylist[i],x,y));
+    y += 20;
+    
+  }
+
+  for (let i = 0; i < playlist1Raw.length; i++) {
+    playlist1.push(new SongTileViewManager(playlist1Raw[i],x,y));
+    y += 20;
+    
+  }
+
+  for (let i = 0; i < playlist2Raw.length; i++) {
+    playlist2.push(new SongTileViewManager(playlist2Raw[i],x,y));
+    y += 20;
+    
+  }
+
+  for (let i = 0; i < playlist3Raw.length; i++) {
+    playlist3.push(new SongTileViewManager(playlist3Raw[i],x,y));
+    y += 20;
+    
+  }
 
 }
 
@@ -70,6 +109,42 @@ function draw() {
   })
 
   reproduciendo.show(defaultPlaylist[currentSoundIndex].nombre,20)
+  reproduciendoArtista.show(defaultPlaylist[currentSoundIndex].artista,15)
+
+  switch (currentPlaylist) {
+    case playlist0:
+
+      playlist0.forEach(cancion => {
+        cancion.show()
+      })
+      
+      break;
+
+      case playlist1:
+
+        playlist1.forEach(cancion => {
+          cancion.show()
+        })
+      
+      break;
+
+      case playlist2:
+
+        playlist2.forEach(cancion => {
+          cancion.show()
+        })
+      
+      break;
+
+      case playlist3:
+
+        playlist3.forEach(cancion => {
+          cancion.show()
+        })
+      
+      break;
+  
+  }
   
 
 }
@@ -92,7 +167,7 @@ function keyPressed() {
         defaultPlaylist[currentSoundIndex].data.pause().setVolume(volumen);
         background(255, 0, 0);
       } else {
-        //defaultPlaylist[currentSoundIndex].data.play().setVolume(volumen);
+        defaultPlaylist[currentSoundIndex].data.play().setVolume(volumen);
         background(0, 255, 0);
       }
       break;
