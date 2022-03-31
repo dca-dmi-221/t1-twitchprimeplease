@@ -70,11 +70,11 @@ let playlist3 = [];
 let currentPlaylist = playlist0;
 
 function setup() {
-  let cnv = createCanvas(1440, 730);
+  let cnv = createCanvas(1920, 1080);
   let x = 800;
   let y = 100;
   for (let i = 0; i < defaultPlaylist.length; i++) {
-    //playlist0.push(new SongTileViewManager(defaultPlaylist[i],x,y));
+    playlist0.push(new SongTileViewManager(defaultPlaylist[i],x,y));
     y += 20;
     
   }
@@ -214,7 +214,12 @@ function mousePressed(){
 
   // defaultPlaylist.accionar()
   
-
+  currentPlaylist.forEach((songManager, index) => {
+    songManager.interact(mouseX, mouseY, (song) => {
+      song.play();
+      currentSoundIndex = index;
+    })
+  })
 
 }
 

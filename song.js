@@ -12,10 +12,9 @@ class Song{
     }
 
 
-    validateClick(mx,my){
 
-        return (mx < this.x && my < this.y && mx < this.x + 700 && my < this.y + 50)
-
+    play() {
+        this.data.play();
     }
 
     // get nombre() {
