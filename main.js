@@ -34,28 +34,28 @@ function preload() {
 
 //bottoms
 let botones = []
-let play = new Play(720,650);
+let play = new Play(850,850);
 botones.push(play);
 
-let pause = new Pause (750,650);
+let pause = new Pause (880,850);
 botones.push(pause);
 
-let next = new Next(780,650);
+let next = new Next(910,850);
 botones.push(next);
 
-let prev = new Prev(660,650);
+let prev = new Prev(790,850);
 botones.push(prev);
 
-let stop = new Stop(690,650);
+let stop = new Stop(820,850);
 botones.push(stop)
 
 //variable Volumen
 let volumen = 0.5;
 
 //texto
-let reproduciendo = new Texto (720,600)
-let reproduciendoArtista = new Texto (720, 630)
-let listaDeReproduccion = new Texto (720, 100)
+let reproduciendo = new Texto (850,800)
+let reproduciendoArtista = new Texto (850, 830)
+let listaDeReproduccion = new Texto (850, 100)
 
 //playlist
 
@@ -67,40 +67,42 @@ let playlist2 = [];
 let playlist3Raw = [];
 let playlist3 = [];
 
+let titulo = "Todas las canciones"
+
 let currentPlaylist = playlist0;
 
 function setup() {
   let cnv = createCanvas(1920, 1080);
-  let x = 800;
-  let y = 100;
+  let x = 1050;
+  let y = 150;
   for (let i = 0; i < defaultPlaylist.length; i++) {
     playlist0.push(new SongTileViewManager(defaultPlaylist[i],x,y));
-    y += 20;
+    y += 25;
     
   }
 
   for (let i = 0; i < playlist1Raw.length; i++) {
     playlist1.push(new SongTileViewManager(playlist1Raw[i],x,y));
-    y += 20;
+    y += 25;
     
   }
 
   for (let i = 0; i < playlist2Raw.length; i++) {
     playlist2.push(new SongTileViewManager(playlist2Raw[i],x,y));
-    y += 20;
+    y += 25;
     
   }
 
   for (let i = 0; i < playlist3Raw.length; i++) {
     playlist3.push(new SongTileViewManager(playlist3Raw[i],x,y));
-    y += 20;
+    y += 25;
     
   }
 
 }
 
 function draw() {
-  background(255);
+  background(95);
   ellipse(200, 200, 100, 100);
   botones.forEach(elemento =>{
 
@@ -108,8 +110,15 @@ function draw() {
 
   })
 
+  //console.log(currentPlaylist[currentSoundIndex].data.currentTime());
+  fill(150)
+  rect(100,900,1720,30)
+  fill(0)
+  rect(100,900,(100*defaultPlaylist[currentSoundIndex].data.currentTime()),30)
   reproduciendo.show(defaultPlaylist[currentSoundIndex].nombre,20)
   reproduciendoArtista.show(defaultPlaylist[currentSoundIndex].artista,15)
+
+  listaDeReproduccion.show(titulo,50)
 
   switch (currentPlaylist) {
     case playlist0:
@@ -191,7 +200,7 @@ function jumpSong(mode) {
   }
 
   if (verify) {
-    console.log('aaaa')
+    //console.log('aaaa')
     
     defaultPlaylist[currentSoundIndex].data.stop();
     currentSoundIndex += jumper;
@@ -231,4 +240,15 @@ function mouseReleased(){
 
   })
 
+}
+
+//función basada en la hecha por el usuario "Alberto" en el siguiente URL https://desarrolloweb.com/faq/convertir-segundos-en-horas-minutos-y-segundos-en-javascript
+
+function transformarSegundos(segundos) {
+
+  let minutos = Math.round((segundos / 60) % 60);
+  minutos = (minutos < 10)? '0' + minutos : minutos;
+  let segundo = Math.round(segundos % 60);
+  segundo = (segundo < 10)? '0' + segundo : segundo;
+  return minutos + ':' + segundo;
 }
