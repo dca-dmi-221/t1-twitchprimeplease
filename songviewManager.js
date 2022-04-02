@@ -36,4 +36,8 @@ class SongTileViewManager {
         
     }
 
+    xdd (callback) {
+        callback(this.tiles);
+    }
+
 }

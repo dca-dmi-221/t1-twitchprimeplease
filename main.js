@@ -56,6 +56,7 @@ let volumen = 0.5;
 let reproduciendo = new Texto (850,800)
 let reproduciendoArtista = new Texto (850, 830)
 let listaDeReproduccion = new Texto (850, 100)
+let avanceDeReproduccion = new Texto (900,1800)
 
 //playlist
 
@@ -69,7 +70,7 @@ let playlist3 = [];
 
 let titulo = "Todas las canciones"
 
-let currentPlaylist = playlist0;
+let currentPlaylist;
 
 function setup() {
   let cnv = createCanvas(1920, 1080);
@@ -99,6 +100,9 @@ function setup() {
     
   }
 
+  currentPlaylist = playlist1
+  //console.log(currentPlaylist)
+
 }
 
 function draw() {
@@ -110,15 +114,27 @@ function draw() {
 
   })
 
+  //console.log(currentPlaylist);
+
   //console.log(currentPlaylist[currentSoundIndex].data.currentTime());
   fill(150)
   rect(100,900,1720,30)
   fill(0)
-  rect(100,900,(100*defaultPlaylist[currentSoundIndex].data.currentTime()),30)
-  reproduciendo.show(defaultPlaylist[currentSoundIndex].nombre,20)
-  reproduciendoArtista.show(defaultPlaylist[currentSoundIndex].artista,15)
+  //rect(100,900,(100*currentPlaylist[currentSoundIndex].data.currentTime()),30)
+
+  if (currentPlaylist.length > 0) {
+      currentPlaylist[currentSoundIndex].xdd((song)=> {
+      reproduciendo.show(song.nombre,20)
+      reproduciendoArtista.show(song.artista,15)
+    })
+    }
+
+    
+  
 
   listaDeReproduccion.show(titulo,50)
+  
+  //avanceDeReproduccion.show(defaultPlaylist[currentSoundIndex].transformarSegundos(defaultPlaylist[currentSoundIndex].data.currentTime()), + "/" + defaultPlaylist[currentSoundIndex].transformarSegundos(defaultPlaylist[currentSoundIndex].duration()),14)
 
   switch (currentPlaylist) {
     case playlist0:
@@ -130,10 +146,12 @@ function draw() {
       break;
 
       case playlist1:
-
-        playlist1.forEach(cancion => {
-          cancion.show()
-        })
+        if (currentPlaylist.length > 0) {
+          playlist1.forEach(cancion => {
+            cancion.show()
+          })
+        }
+        
       
       break;
 
@@ -224,12 +242,16 @@ function mousePressed(){
   // defaultPlaylist.accionar()
   
   currentPlaylist.forEach((songManager, index) => {
+
     songManager.interact(mouseX, mouseY, (song) => {
+      defaultPlaylist[currentSoundIndex].data.stop();
       song.play();
       currentSoundIndex = index;
+
     })
   })
 
+  
 }
 
 function mouseReleased(){

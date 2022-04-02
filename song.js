@@ -14,6 +14,7 @@ class Song{
 
 
     play() {
+        
         this.data.play();
     }
 
