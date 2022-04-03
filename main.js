@@ -34,26 +34,35 @@ function preload() {
 
 //bottoms
 let botones = []
-let play = new Play(850,850);
-botones.push(play);
-
-let pause = new Pause (880,850);
-botones.push(pause);
-
-let next = new Next(910,850);
-botones.push(next);
-
-let prev = new Prev(790,850);
-botones.push(prev);
-
-let stop = new Stop(820,850);
-botones.push(stop)
 
 let plusVol = new PlusVol (130,850);
 botones.push(plusVol);
 
 let restVol = new RestVol(100,850);
 botones.push(restVol);
+
+let prev = new Prev(760,850);
+botones.push(prev);
+
+let rest25 = new Rest25 (790,850)
+botones.push(rest25);
+
+let stop = new Stop(820,850);
+botones.push(stop)
+
+let play = new Play(850,850);
+botones.push(play);
+
+let pause = new Pause (880,850);
+botones.push(pause);
+
+let plus25 = new Plus25 (910,850)
+botones.push(plus25);
+
+let next = new Next(940,850);
+botones.push(next);
+
+
 
 //variable Volumen
 let volumen = 0.5;
@@ -243,7 +252,7 @@ function keyPressed() {
       //r key
       if (currentPlaylist.length > 0) {
         currentPlaylist[currentSoundIndex].items((song)=> {
-          song.data.jump(25);
+          song.data.jump(song.data.currentTime()+25);
       })
       }
       break;

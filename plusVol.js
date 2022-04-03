@@ -33,6 +33,6 @@ class PlusVol extends Boton {
         
         }
     }
-    console.log(volumen);
+
     }
 }

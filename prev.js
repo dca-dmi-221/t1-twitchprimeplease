@@ -21,7 +21,7 @@ class Prev extends Boton {
       fill(this._r,this._g,this._b);
       rect(this._x, this._y, this._bWeight, this._bHeight);
       textAlign(CENTER)
-      text("⏪",this._x+10, this._y+15)
+      text("⏮",this._x+10, this._y+15)
       textAlign(RIGHT)
       noFill();
       }
