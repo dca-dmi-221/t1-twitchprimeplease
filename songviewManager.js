@@ -8,11 +8,11 @@ class SongTileViewManager {
     show() {
        // console.log(this.tiles);
 
-        fill(0);
+        fill(242,242,242,200);
         rectMode(CENTER)
 
         rect(this.x,this.y,1000,20,15);
-        fill(255);
+        fill(0);
         textAlign(LEFT,CENTER);
         text(this.tiles.nombre,this.x -490,this.y)
         text(this.tiles.artista,this.x-250,this.y)

@@ -3,25 +3,15 @@ class Play extends Boton {
     constructor(x,y){
       super(x,y)
   
-      this._r = 0
-      this._g = 0
-      this._b = 0
+      this._r = 242
+      this._g = 242
+      this._b = 242
     }
 
     show(){
-
-    if (this.underPressured) {
-        this._r = 0;
-    }else if (!this.underPressured) {
-        this._r = 0;
-        this._g = 0;
-        this._b = 0;
-    }
-
     
-    
-    fill(this._r,this._g,this._b);
-    rect(this._x, this._y, this._bWeight, this._bHeight);
+    fill(this._r,this._g,this._b,200);
+    rect(this._x, this._y, this._bWeight, this._bHeight,20);
     textAlign(CENTER,CENTER);
     textSize(this._bHeight/2)
     text("▶️",this._x+(this._bWeight/2), this._y+(this._bHeight/2))

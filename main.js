@@ -118,45 +118,47 @@ let y1 = 150;
 let y2 = 150;
 let y3 = 150;
 
+// Imagenes 
+
+let fondoYuya;
+let fondoYuto;
+let fondoYugo;
+let fondoYuri;
+
+
 function setup() {
   let cnv = createCanvas(1920, 1080);
   for (let i = 0; i < defaultPlaylist.length; i++) {
     playlist0.push(new SongTileViewManager(defaultPlaylist[i],x,y));
     y += 25;
   }
-  
+
+  fondoYuya = loadImage('./Images/YuyaFondo.png')
+  fondoYuto = loadImage('./Images/YutoFondo.png')
+  fondoYugo = loadImage('./Images/YugoFondo.png')
+  fondoYuri = loadImage('./Images/YuriFondo.png')
+    
   currentPlaylist = playlist0
 }
 
 function draw() {
   background(95);
-  botones.forEach(elemento =>{
-    elemento.show();
-  })
-  
-  fill(150)
-  rect(100,900,1720,30)
-  fill(0)
-  text(mouseX + "/" + mouseY,mouseX,mouseY);
-
-  listaDeReproduccion.show(titulo,50)
-
+  noStroke();
   switch (currentPlaylist) {
     case playlist0:
-      
+      fill(242)
+      image(fondoYuya,0,0)
       playlist0.forEach(cancion => {
         cancion.show()
         
       })
-      
-      p1Bottoms.forEach(boton => {
-        boton.show();
-        })
+
 
       titulo = "Todas las canciones"
       
       if (currentPlaylist.length > 0) {
         currentPlaylist[currentSoundIndex].items((song)=> {
+          
         rect(100,900,(song.data.currentTime()*(1720/song.data.duration())),30)
       })
     }
@@ -179,11 +181,23 @@ function draw() {
     })
     }
 
+    botones.forEach(elemento =>{
+      elemento.show();
+    })
+    
+    
+    rect(100,900,1720,30)
+    
+    
+  
+    listaDeReproduccion.show(titulo,50)
 
+    noFill();
       break;
 
       case playlist1:
-  
+        fill(242)
+        image(fondoYuto,0,0)
         if (currentPlaylist.length > 0) {
           playlist1.forEach(cancion => {
             cancion.show()
@@ -215,18 +229,19 @@ function draw() {
           }
       })
       }
+
+      botones.forEach(elemento =>{
+        elemento.show();
+      })
+      
+      rect(100,900,1720,30)
+      listaDeReproduccion.show(titulo,50)
+      noFill();
       break;
 
       case playlist2:
-        let x2 = 1200;
-        let y2 = 150;
-        for (let i = 0; i < playlist2Raw.length; i++) {
-          playlist2.push(new SongTileViewManager(playlist2Raw[i],x2,y2));
-          y2 += 25;
-          
-        }
-  
-
+        fill(242)
+        image(fondoYugo,0,0)
         if (currentPlaylist.length > 0) {
           playlist2.forEach(cancion => {
             cancion.show()
@@ -256,17 +271,19 @@ function draw() {
           }
       })
       }
+
+      botones.forEach(elemento =>{
+        elemento.show();
+      })
+      rect(100,900,1720,30)
+
+      listaDeReproduccion.show(titulo,50)
+      noFill();
       break;
 
       case playlist3:
-      
-        let x3 = 1200;
-        let y3 = 150;
-        for (let i = 0; i < playlist2Raw.length; i++) {
-          playlist2.push(new SongTileViewManager(playlist2Raw[i],x3,y3));
-          y3 += 25;
-          
-        }
+        fill(242)
+        image(fondoYuri,0,0);
         if (currentPlaylist.length > 0) {
           playlist3.forEach(cancion => {
             cancion.show()
@@ -296,6 +313,14 @@ function draw() {
           }
       })
       }
+
+      botones.forEach(elemento =>{
+        elemento.show();
+      })
+      rect(100,900,1720,30)
+    
+      listaDeReproduccion.show(titulo,50)
+      noFill();
       break;
   
   }
@@ -345,6 +370,8 @@ function keyPressed() {
       }
       break;
   }
+
+  
 }
 
 function jumpSong(mode) {

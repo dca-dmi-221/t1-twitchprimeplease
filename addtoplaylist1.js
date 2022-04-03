@@ -1,14 +1,14 @@
 class AddToPlaylist1 extends Boton {
     constructor(x,y){
     super(x,y)
-    this._r = 200
-    this._g = 200
-    this._b = 200
+    this._r = 242
+    this._g = 242
+    this._b = 242
     }
 
     show(){
-        fill(this._r,this._g,this._b);
-        rect(this._x, this._y, this._bWeight, this._bHeight,2);
+        fill(this._r,this._g,this._b,200);
+        rect(this._x, this._y, this._bWeight, this._bHeight,20);
         textAlign(CENTER,CENTER);
         textSize(this._bHeight/2)
         fill(0)

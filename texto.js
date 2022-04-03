@@ -4,7 +4,7 @@ class Texto{
     this._y = y;
     }
     show(texto,size){
-    fill(0)
+    fill(242)
     textAlign(CENTER);
     textSize(size)
     text(texto,this._x,this._y)

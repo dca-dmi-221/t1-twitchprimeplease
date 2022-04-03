@@ -13,16 +13,9 @@ class Boton {
     }
 
     show(){
-      //console.log("a")
 
-    if (this.underPressured) {
-        this._r = 0;
-    }else if (!this.underPressured) {
-        this._r = 150;
-    }
-    
     fill(this._r,this._g,this._b);
-    rect(this._x, this._y, this._bWeight, this._bHeight);
+    rect(this._x, this._y, this._bWeight, this._bHeight,20);
     noFill();
     }
 
