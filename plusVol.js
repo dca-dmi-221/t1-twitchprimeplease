@@ -10,10 +10,12 @@ class PlusVol extends Boton {
     
     fill(this._r,this._g,this._b);
     rect(this._x, this._y, this._bWeight, this._bHeight);
-    textAlign(CENTER)
+    textAlign(CENTER,CENTER)
+    textSize(this._bHeight/2)
     fill(255)
-    text("+",this._x+10, this._y+15)
-    textAlign(RIGHT)
+    text("+",this._x+(this._bWeight/2), this._y+(this._bHeight/2))
+    textAlign(RIGHT,BOTTOM)
+    textSize(12)
     noFill();
     }
     accionar (){

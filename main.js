@@ -6,7 +6,7 @@ console.log(input)
 input.addEventListener('input', e => {
   let file = e.target.files[0];
   const soundFile = new p5.SoundFile(file);
-  defaultPlaylist.push(soundFile)
+  playlist0.push(new SongTileViewManager(soundFile,x,y))
 })
 
 function createObjectURL(file) {
@@ -35,32 +35,44 @@ function preload() {
 //bottoms
 let botones = []
 
-let plusVol = new PlusVol (130,850);
+let plusVol = new PlusVol (160,830);
 botones.push(plusVol);
 
-let restVol = new RestVol(100,850);
+let restVol = new RestVol(100,830);
 botones.push(restVol);
 
-let prev = new Prev(760,850);
+let prev = new Prev(670,830);
 botones.push(prev);
 
-let rest25 = new Rest25 (790,850)
+let rest25 = new Rest25 (730,830)
 botones.push(rest25);
 
-let stop = new Stop(820,850);
+let stop = new Stop(790,830);
 botones.push(stop)
 
-let play = new Play(850,850);
+let play = new Play(850,830);
 botones.push(play);
 
-let pause = new Pause (880,850);
+let pause = new Pause (910,830);
 botones.push(pause);
 
-let plus25 = new Plus25 (910,850)
+let plus25 = new Plus25 (970,830)
 botones.push(plus25);
 
-let next = new Next(940,850);
+let next = new Next(1030,830);
 botones.push(next);
+
+let toplaylist0 = new ToPlaylist0(100,150);
+botones.push(toplaylist0);
+
+let toplaylist1 = new ToPlaylist1(100,210);
+botones.push(toplaylist1);
+
+let toplaylist2 = new ToPlaylist2(100,270);
+botones.push(toplaylist2);
+
+let toplaylist3 = new ToPlaylist3(100,330);
+botones.push(toplaylist3);
 
 
 
@@ -68,10 +80,11 @@ botones.push(next);
 let volumen = 0.5;
 
 //texto
-let reproduciendo = new Texto (850,800)
-let reproduciendoArtista = new Texto (850, 830)
-let listaDeReproduccion = new Texto (850, 100)
-let avanceDeReproduccion = new Texto (1700,845)
+let reproduciendo = new Texto (870,750)
+let reproduciendoArtista = new Texto (870, 780)
+let listaDeReproduccion = new Texto (870, 100)
+let avanceDeReproduccion = new Texto (1700,870)
+let titulo = "Todas las canciones"
 
 //playlist
 
@@ -83,50 +96,30 @@ let playlist2 = [];
 let playlist3Raw = [];
 let playlist3 = [];
 
-let titulo = "Todas las canciones"
+let p1Bottoms = [];
 
 let currentPlaylist;
+let x = 1200;
+let y = 150;
+let y1 = 150;
+let y2 = 150;
+let y3 = 150;
 
 function setup() {
   let cnv = createCanvas(1920, 1080);
-  let x = 950;
-  let y = 150;
   for (let i = 0; i < defaultPlaylist.length; i++) {
     playlist0.push(new SongTileViewManager(defaultPlaylist[i],x,y));
+    botones.push(new AddToPlaylist1(x+370,y))
     y += 25;
-    
   }
-
-  for (let i = 0; i < playlist1Raw.length; i++) {
-    playlist1.push(new SongTileViewManager(playlist1Raw[i],x,y));
-    y += 25;
-    
-  }
-
-  for (let i = 0; i < playlist2Raw.length; i++) {
-    playlist2.push(new SongTileViewManager(playlist2Raw[i],x,y));
-    y += 25;
-    
-  }
-
-  for (let i = 0; i < playlist3Raw.length; i++) {
-    playlist3.push(new SongTileViewManager(playlist3Raw[i],x,y));
-    y += 25;
-    
-  }
-
+  
   currentPlaylist = playlist0
-  //console.log(currentPlaylist)
-
 }
 
 function draw() {
   background(95);
-  ellipse(200, 200, 100, 100);
   botones.forEach(elemento =>{
-
     elemento.show();
-
   })
   
   fill(150)
@@ -136,12 +129,8 @@ function draw() {
   if (currentPlaylist.length > 0) {
     currentPlaylist[currentSoundIndex].items((song)=> {
       rect(100,900,(song.data.currentTime()*(1720/song.data.duration())),30)
-      //console.log(song.data.currentTime());
-      //14.862889077325582
-  })
+    })
   }
-  
-
   if (currentPlaylist.length > 0) {
       currentPlaylist[currentSoundIndex].items((song)=> {
       reproduciendo.show(song.nombre,20)
@@ -164,19 +153,31 @@ function draw() {
   
 
   listaDeReproduccion.show(titulo,50)
-  
-  //avanceDeReproduccion.show(defaultPlaylist[currentSoundIndex].transformarSegundos(defaultPlaylist[currentSoundIndex].data.currentTime()), + "/" + defaultPlaylist[currentSoundIndex].transformarSegundos(defaultPlaylist[currentSoundIndex].duration()),14)
 
   switch (currentPlaylist) {
     case playlist0:
-
+      
       playlist0.forEach(cancion => {
         cancion.show()
+        
       })
+      
+      p1Bottoms.forEach(boton => {
+        boton.show();
+        })
+
+      titulo = "Todas las canciones"
       
       break;
 
       case playlist1:
+        
+        // for (let i = 0; i < playlist1Raw.length; i++) {
+        //   playlist1.push(new SongTileViewManager(playlist1Raw[i],x1,y1));
+        //   y1 += 25;
+          
+        // }
+  
         if (currentPlaylist.length > 0) {
           playlist1.forEach(cancion => {
             cancion.show()
@@ -189,6 +190,14 @@ function draw() {
       break;
 
       case playlist2:
+        let x2 = 1200;
+        let y2 = 150;
+        for (let i = 0; i < playlist2Raw.length; i++) {
+          playlist2.push(new SongTileViewManager(playlist2Raw[i],x2,y2));
+          y2 += 25;
+          
+        }
+  
 
         if (currentPlaylist.length > 0) {
           playlist2.forEach(cancion => {
@@ -200,7 +209,14 @@ function draw() {
       break;
 
       case playlist3:
-
+      
+        let x3 = 1200;
+        let y3 = 150;
+        for (let i = 0; i < playlist2Raw.length; i++) {
+          playlist2.push(new SongTileViewManager(playlist2Raw[i],x3,y3));
+          y3 += 25;
+          
+        }
         if (currentPlaylist.length > 0) {
           playlist3.forEach(cancion => {
             cancion.show()
@@ -298,40 +314,36 @@ function mousePressed(){
     elemento.action();
     elemento.accionar (currentPlaylist,currentSoundIndex);
 
-    
   })
 
-  // defaultPlaylist.accionar()
-  
   currentPlaylist.forEach((songManager, index) => {
-
     songManager.interact(mouseX, mouseY, (song) => {
       if (currentPlaylist.length > 0) {
         currentPlaylist[currentSoundIndex].items((cancion)=> {
           cancion.data.stop();
       })
       }
-    
       song.play();
       currentSoundIndex = index;
 
     })
   })
 
-  
+  p1Bottoms.forEach(boton => {
+    boton.accionar();
+  })
 }
+
 
 function mouseReleased(){
 
   botones.forEach(elemento =>{
-
     elemento.underPressured = false;
-
   })
-
+  p1Bottoms.forEach(boton => {
+    boton.underPressured = false;
+  })
 }
-
-//función basada en la hecha por el usuario "Alberto" en el siguiente URL https://desarrolloweb.com/faq/convertir-segundos-en-horas-minutos-y-segundos-en-javascript
 
 function transformarSegundos(segundos) {
 

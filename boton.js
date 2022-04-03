@@ -4,8 +4,8 @@ class Boton {
     constructor(x,y){
     this._x = x
     this._y = y;
-    this._bWeight = 20;
-    this._bHeight = 20;
+    this._bWeight = 50;
+    this._bHeight = 50;
     this._r = 150;
     this._g = 150;
     this._b = 150;
