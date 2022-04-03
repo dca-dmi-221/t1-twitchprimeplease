@@ -26,9 +26,15 @@ class Stop extends Boton {
       textAlign(RIGHT)
       noFill();
       }
-    accionar (array,index){
+    accionar (){
       if(this.underPressured){
-        array[currentSoundIndex].data.stop()
+        if (currentPlaylist.length > 0) {
+          currentPlaylist[currentSoundIndex].items((song)=> {
+            if(song.data.isPlaying()){
+              song.stop()
+            }
+          })
+        }
       }
     }
   }

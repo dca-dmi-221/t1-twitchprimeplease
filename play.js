@@ -28,12 +28,17 @@ class Play extends Boton {
     noFill();
     }
 
-    accionar (array,index){
-  
+    accionar (){
+        
       if(this.underPressured){
-        if(!array[index].data.isPlaying()){
-          array[index].data.play();
+        if (currentPlaylist.length > 0) {
+          currentPlaylist[currentSoundIndex].items((song)=> {
+            if(!song.isPlaying()){
+              song.data.play();
+            }
+          })
         }
+        
       }
     }
   }

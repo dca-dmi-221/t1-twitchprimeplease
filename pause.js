@@ -25,10 +25,17 @@ class Pause extends Boton {
       textAlign(RIGHT)
       noFill();
       }
-    accionar (array,index){
+    accionar (){
   
       if(this.underPressured){
-        array[currentSoundIndex].data.pause()
+        if (currentPlaylist.length > 0) {
+          currentPlaylist[currentSoundIndex].items((song)=> {
+            
+            if(song.data.isPlaying()){
+              song.data.pause()
+            }
+          })
+        }
       }
     }
   }

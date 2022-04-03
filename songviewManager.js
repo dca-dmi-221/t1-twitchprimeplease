@@ -10,15 +10,15 @@ class SongTileViewManager {
 
         fill(0);
         //rectMode(CENTER)
-        rect(this.x-100,this.y,900,20);
+        rect(this.x,this.y,900,20);
         fill(255);
-        textAlign(CENTER,TOP);
+        textAlign(LEFT,TOP);
         text(this.tiles.nombre,this.x,this.y)
-        text(this.tiles.artista,this.x-300,this.y, this.x+ 39)
-        text(this.tiles.album,this.x -220,this.y, this.x+ 59)
-        text(this.tiles.genero,this.x -90,this.y, this.x + 79)
-        text(this.tiles.publicationYear,this.x, this.y, this.x + 99)
-        text(transformarSegundos(this.tiles.data.duration()) + " minutes", this.x + 100, this.y,this.x + 119)
+        text(this.tiles.artista,this.x+200,this.y)
+        text(this.tiles.album,this.x +350,this.y)
+        text(this.tiles.genero,this.x +450,this.y)
+        text(this.tiles.publicationYear,this.x+600, this.y)
+        text(transformarSegundos(this.tiles.data.duration()) + " minutes", this.x + 700, this.y)
         textAlign(CENTER,BOTTOM)
     
         noFill();
@@ -36,7 +36,7 @@ class SongTileViewManager {
         
     }
 
-    xdd (callback) {
+    items(callback) {
         callback(this.tiles);
     }
 

@@ -27,13 +27,13 @@ class Boton {
     }
 
     action(){
-    if (mouseX>this._x && mouseX<this._x+this._bWeight && mouseY>this._y && mouseY < this._y + height){
+    if (mouseX > this._x && mouseX < this._x+this._bWeight && mouseY > this._y && mouseY < this._y + this._bHeight){
         this.underPressured = true;
     } else {
         this.underPressured = false;
     }
     }
-    accionar (array,index){
+    accionar (){
     
     }
 }

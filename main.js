@@ -49,6 +49,12 @@ botones.push(prev);
 let stop = new Stop(820,850);
 botones.push(stop)
 
+let plusVol = new PlusVol (130,850);
+botones.push(plusVol);
+
+let restVol = new RestVol(100,850);
+botones.push(restVol);
+
 //variable Volumen
 let volumen = 0.5;
 
@@ -56,7 +62,7 @@ let volumen = 0.5;
 let reproduciendo = new Texto (850,800)
 let reproduciendoArtista = new Texto (850, 830)
 let listaDeReproduccion = new Texto (850, 100)
-let avanceDeReproduccion = new Texto (900,1800)
+let avanceDeReproduccion = new Texto (1700,845)
 
 //playlist
 
@@ -74,7 +80,7 @@ let currentPlaylist;
 
 function setup() {
   let cnv = createCanvas(1920, 1080);
-  let x = 1050;
+  let x = 950;
   let y = 150;
   for (let i = 0; i < defaultPlaylist.length; i++) {
     playlist0.push(new SongTileViewManager(defaultPlaylist[i],x,y));
@@ -100,7 +106,7 @@ function setup() {
     
   }
 
-  currentPlaylist = playlist1
+  currentPlaylist = playlist0
   //console.log(currentPlaylist)
 
 }
@@ -113,23 +119,39 @@ function draw() {
     elemento.show();
 
   })
-
-  //console.log(currentPlaylist);
-
-  //console.log(currentPlaylist[currentSoundIndex].data.currentTime());
+  
   fill(150)
   rect(100,900,1720,30)
   fill(0)
-  //rect(100,900,(100*currentPlaylist[currentSoundIndex].data.currentTime()),30)
+  text(mouseX + "/" + mouseY,mouseX,mouseY);
+  if (currentPlaylist.length > 0) {
+    currentPlaylist[currentSoundIndex].items((song)=> {
+      rect(100,900,(song.data.currentTime()*(1720/song.data.duration())),30)
+      //console.log(song.data.currentTime());
+      //14.862889077325582
+  })
+  }
+  
 
   if (currentPlaylist.length > 0) {
-      currentPlaylist[currentSoundIndex].xdd((song)=> {
+      currentPlaylist[currentSoundIndex].items((song)=> {
       reproduciendo.show(song.nombre,20)
       reproduciendoArtista.show(song.artista,15)
+      avanceDeReproduccion.show(transformarSegundos(song.data.currentTime()) + "/" + transformarSegundos(song.data.duration()),19)
+    
     })
     }
 
     
+
+    if (currentPlaylist.length > 0) {
+      currentPlaylist[currentSoundIndex].items((song)=> {
+        if(song.data.currentTime() === song.data.duration()){ 
+          jumpSong('next');
+          song.data.play().setVolume(volumen);
+        }
+    })
+    }
   
 
   listaDeReproduccion.show(titulo,50)
@@ -151,23 +173,31 @@ function draw() {
             cancion.show()
           })
         }
+
+        titulo = "Playlist 1"
         
       
       break;
 
       case playlist2:
 
-        playlist2.forEach(cancion => {
-          cancion.show()
-        })
+        if (currentPlaylist.length > 0) {
+          playlist2.forEach(cancion => {
+            cancion.show()
+          })
+        }
+        titulo = "Playlist 2"
       
       break;
 
       case playlist3:
 
-        playlist3.forEach(cancion => {
-          cancion.show()
-        })
+        if (currentPlaylist.length > 0) {
+          playlist3.forEach(cancion => {
+            cancion.show()
+          })
+        }
+        titulo = "Playlist 3"
       
       break;
   
@@ -181,26 +211,41 @@ function keyPressed() {
     case 39:
       //arrow right
       jumpSong('next');
-      defaultPlaylist[currentSoundIndex].data.play().setVolume(volumen);
+      if (currentPlaylist.length > 0) {
+        currentPlaylist[currentSoundIndex].items((song)=> {
+          song.data.play().setVolume(volumen);
+      })
+      }
+      
       break;
     case 37:
       //arrow leftx
       jumpSong('prev');
-      defaultPlaylist[currentSoundIndex].data.play().setVolume(volumen);
+      if (currentPlaylist.length > 0) {
+        currentPlaylist[currentSoundIndex].items((song)=> {
+          song.data.play().setVolume(volumen);
+      })
+      }
       break;
     case 32:
       //space bar
-      if (defaultPlaylist[currentSoundIndex].data.isPlaying()) {
-        defaultPlaylist[currentSoundIndex].data.pause().setVolume(volumen);
-        background(255, 0, 0);
-      } else {
-        defaultPlaylist[currentSoundIndex].data.play().setVolume(volumen);
-        background(0, 255, 0);
+      if (currentPlaylist.length > 0) {
+        currentPlaylist[currentSoundIndex].items((song)=> {
+          if (song.data.isPlaying()) {
+            song.data.pause().setVolume(volumen);
+          } else {
+            song.data.play().setVolume(volumen);
+          }
+      })
       }
       break;
     case 82:
       //r key
-      defaultPlaylist[currentSoundIndex].data.jump(25);
+      if (currentPlaylist.length > 0) {
+        currentPlaylist[currentSoundIndex].items((song)=> {
+          song.data.jump(25);
+      })
+      }
       break;
   }
 }
@@ -211,7 +256,7 @@ function jumpSong(mode) {
   let verify = false;
   if (mode === 'next') {
     jumper = 1;
-    verify = currentSoundIndex + 1 < defaultPlaylist.length
+    verify = currentSoundIndex + 1 < currentPlaylist.length
   } else if (mode === 'prev') {
     jumper = -1;
     verify = currentSoundIndex - 1 > 0
@@ -219,11 +264,19 @@ function jumpSong(mode) {
 
   if (verify) {
     //console.log('aaaa')
-    
-    defaultPlaylist[currentSoundIndex].data.stop();
+    if (currentPlaylist.length > 0) {
+      currentPlaylist[currentSoundIndex].items((song)=> {
+        song.data.stop();
+    })
+    }
     currentSoundIndex += jumper;
   } else {
-    defaultPlaylist[currentSoundIndex].data.stop();
+
+    if (currentPlaylist.length > 0) {
+      currentPlaylist[currentSoundIndex].items((song)=> {
+        song.data.stop();
+    })
+    }
     currentSoundIndex = 0;
   }
 }
@@ -234,7 +287,7 @@ function mousePressed(){
   botones.forEach(elemento =>{
 
     elemento.action();
-    elemento.accionar (defaultPlaylist,currentSoundIndex);
+    elemento.accionar (currentPlaylist,currentSoundIndex);
 
     
   })
@@ -244,7 +297,12 @@ function mousePressed(){
   currentPlaylist.forEach((songManager, index) => {
 
     songManager.interact(mouseX, mouseY, (song) => {
-      defaultPlaylist[currentSoundIndex].data.stop();
+      if (currentPlaylist.length > 0) {
+        currentPlaylist[currentSoundIndex].items((cancion)=> {
+          cancion.data.stop();
+      })
+      }
+    
       song.play();
       currentSoundIndex = index;
 
@@ -268,9 +326,9 @@ function mouseReleased(){
 
 function transformarSegundos(segundos) {
 
-  let minutos = Math.round((segundos / 60) % 60);
+  let minutos = Math.floor((segundos / 60) % 60);
   minutos = (minutos < 10)? '0' + minutos : minutos;
-  let segundo = Math.round(segundos % 60);
+  let segundo = Math.floor(segundos % 60);
   segundo = (segundo < 10)? '0' + segundo : segundo;
   return minutos + ':' + segundo;
 }

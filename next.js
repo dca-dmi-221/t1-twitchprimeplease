@@ -26,11 +26,15 @@ class Next extends Boton {
       textAlign(RIGHT)
       noFill();
       }
-    accionar (array,index){
+    accionar (){
       if(this.underPressured){
         jumpSong('next');
 
-        array[currentSoundIndex].data.play();
+        if (currentPlaylist.length > 0) {
+          currentPlaylist[currentSoundIndex].items((song)=> {
+            song.data.play().setVolume(volumen)
+          })
+        }
       };
     }
   }
