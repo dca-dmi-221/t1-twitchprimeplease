@@ -4,8 +4,6 @@ class AddToPlaylist1 extends Boton {
     this._r = 200
     this._g = 200
     this._b = 200
-    this._bWeight = 15;
-    this._bHeight = 15;
     }
 
     show(){
@@ -14,7 +12,7 @@ class AddToPlaylist1 extends Boton {
         textAlign(CENTER,CENTER);
         textSize(this._bHeight/2)
         fill(0)
-        text("P1",this._x, this._y)
+        text("P1",this._x+(this._bWeight/2), this._y+(this._bHeight/2))
         textAlign(RIGHT,BOTTOM)
         textSize(12)
         noFill();
@@ -25,8 +23,8 @@ class AddToPlaylist1 extends Boton {
             
             if (currentPlaylist.length > 0) {
                 
-                    playlist0[i].items((song)=> {
-                        let addToP1 =song
+                        currentPlaylist[currentSoundIndex].items((song)=> {
+                        let addToP1 = song;
                         playlist1.push(new SongTileViewManager(addToP1,x,y1))
                         })
                     

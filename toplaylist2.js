@@ -24,6 +24,13 @@ class ToPlaylist2 extends Boton {
     if(this.underPressured){
         
         currentPlaylist = playlist2
+        if (currentPlaylist.length > 0) {
+            currentPlaylist[currentSoundIndex].items((song)=> {
+                song.stop()
+            
+            })
+        }
+        currentSoundIndex = 0;
         
     }
     }

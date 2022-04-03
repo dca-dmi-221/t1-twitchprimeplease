@@ -28,7 +28,13 @@ function preload() {
   defaultPlaylist = [
     new Song ("Feeling Good", "Michael Buble", "It's Time","Pop", 2005,loadSound('./sounds/Feeling_Good.mp3'),"Feeling_Good.mp3"),
     new Song ("Boy like you", "Ashley Tisdale", " ","Nightcore", 2001, loadSound('./sounds/Boy_like_you.mp3'),"Boy_like_you.mp3"),
-    new Song ("Rol Playing Game", "mafumafu", "Vocaloid", "Rol Playing Game - Ep", 2017, loadSound ('./sounds/RPG.mp3'))
+    new Song ("Rol Playing Game", "mafumafu", "Vocaloid", "Rol Playing Game - Ep", 2017, loadSound ('./sounds/RPG.mp3')),
+    new Song ("7 Year Old", " Lukas Graham"," Lukas Graham","Soul-Pop",2016, loadSound ('./sounds/7_Years_Old.mp3')),
+    new Song ("A Sadness Runs Through Him","The Hoosiers","A Trick of Life","Pop",2007,loadSound('./sounds/A_Sadness_Runs_Through_Him.mp3')),
+    new Song ("Fallen Angel", "Mari Cat", "Nightcore1", "Nightcore", 2015,loadSound('./sounds/Fallen_Angel.mp3')),
+    new Song ("Jitter Doll", "DarkHole","DarlHole - EP","Fansub",2016, loadSound('./sounds/Jitter_Doll.mp3')),
+    new Song ("One Step Closer","Linkin Park"," Hybrid Theory (Bonus Edition)","Nu Metal",2000,loadSound('./sounds/One_Step_Closer.mp3')),
+    new Song ("Savin' me","Nickelback","All the Right Reasons","Post-grunge",2006,loadSound('./sounds/Savin_Me.mp3'))
   ];
 }
 
@@ -74,7 +80,14 @@ botones.push(toplaylist2);
 let toplaylist3 = new ToPlaylist3(100,330);
 botones.push(toplaylist3);
 
+let addtoplaylist1 = new AddToPlaylist1(1200,830);
+botones.push(addtoplaylist1);
 
+let addtoplaylist2 = new AddToPlaylist2(1260,830);
+botones.push(addtoplaylist2);
+
+let addtoplaylist3 = new AddToPlaylist3(1320,830);
+botones.push(addtoplaylist3);
 
 //variable Volumen
 let volumen = 0.5;
@@ -109,7 +122,6 @@ function setup() {
   let cnv = createCanvas(1920, 1080);
   for (let i = 0; i < defaultPlaylist.length; i++) {
     playlist0.push(new SongTileViewManager(defaultPlaylist[i],x,y));
-    botones.push(new AddToPlaylist1(x+370,y))
     y += 25;
   }
   
@@ -126,31 +138,6 @@ function draw() {
   rect(100,900,1720,30)
   fill(0)
   text(mouseX + "/" + mouseY,mouseX,mouseY);
-  if (currentPlaylist.length > 0) {
-    currentPlaylist[currentSoundIndex].items((song)=> {
-      rect(100,900,(song.data.currentTime()*(1720/song.data.duration())),30)
-    })
-  }
-  if (currentPlaylist.length > 0) {
-      currentPlaylist[currentSoundIndex].items((song)=> {
-      reproduciendo.show(song.nombre,20)
-      reproduciendoArtista.show(song.artista,15)
-      avanceDeReproduccion.show(transformarSegundos(song.data.currentTime()) + "/" + transformarSegundos(song.data.duration()),19)
-    
-    })
-    }
-
-    
-
-    if (currentPlaylist.length > 0) {
-      currentPlaylist[currentSoundIndex].items((song)=> {
-        if(song.data.currentTime() === song.data.duration()){ 
-          jumpSong('next');
-          song.data.play().setVolume(volumen);
-        }
-    })
-    }
-  
 
   listaDeReproduccion.show(titulo,50)
 
@@ -168,15 +155,34 @@ function draw() {
 
       titulo = "Todas las canciones"
       
+      if (currentPlaylist.length > 0) {
+        currentPlaylist[currentSoundIndex].items((song)=> {
+        rect(100,900,(song.data.currentTime()*(1720/song.data.duration())),30)
+      })
+    }
+
+    if (currentPlaylist.length > 0) {
+      currentPlaylist[currentSoundIndex].items((song)=> {
+      reproduciendo.show(song.nombre,20)
+      reproduciendoArtista.show(song.artista,15)
+      avanceDeReproduccion.show(transformarSegundos(song.data.currentTime()) + "/" + transformarSegundos(song.data.duration()),19)
+    
+    })
+    }
+
+    if (currentPlaylist.length > 0) {
+      currentPlaylist[currentSoundIndex].items((song)=> {
+        if(song.data.currentTime() === song.data.duration()){ 
+          jumpSong('next');
+          song.data.play().setVolume(volumen);
+        }
+    })
+    }
+
+
       break;
 
       case playlist1:
-        
-        // for (let i = 0; i < playlist1Raw.length; i++) {
-        //   playlist1.push(new SongTileViewManager(playlist1Raw[i],x1,y1));
-        //   y1 += 25;
-          
-        // }
   
         if (currentPlaylist.length > 0) {
           playlist1.forEach(cancion => {
@@ -186,7 +192,29 @@ function draw() {
 
         titulo = "Playlist 1"
         
+        if (currentPlaylist.length > 0) {
+          currentPlaylist[currentSoundIndex].items((song)=> {
+          rect(100,900,(song.data.currentTime()*(1720/song.data.duration())),30)
+        })
+      }
+  
+      if (currentPlaylist.length > 0) {
+        currentPlaylist[currentSoundIndex].items((song)=> {
+        reproduciendo.show(song.nombre,20)
+        reproduciendoArtista.show(song.artista,15)
+        avanceDeReproduccion.show(transformarSegundos(song.data.currentTime()) + "/" + transformarSegundos(song.data.duration()),19)
       
+      })
+      }
+  
+      if (currentPlaylist.length > 0) {
+        currentPlaylist[currentSoundIndex].items((song)=> {
+          if(song.data.currentTime() === song.data.duration()){ 
+            jumpSong('next');
+            song.data.play().setVolume(volumen);
+          }
+      })
+      }
       break;
 
       case playlist2:
@@ -205,7 +233,29 @@ function draw() {
           })
         }
         titulo = "Playlist 2"
+        if (currentPlaylist.length > 0) {
+          currentPlaylist[currentSoundIndex].items((song)=> {
+          rect(100,900,(song.data.currentTime()*(1720/song.data.duration())),30)
+        })
+      }
+  
+      if (currentPlaylist.length > 0) {
+        currentPlaylist[currentSoundIndex].items((song)=> {
+        reproduciendo.show(song.nombre,20)
+        reproduciendoArtista.show(song.artista,15)
+        avanceDeReproduccion.show(transformarSegundos(song.data.currentTime()) + "/" + transformarSegundos(song.data.duration()),19)
       
+      })
+      }
+  
+      if (currentPlaylist.length > 0) {
+        currentPlaylist[currentSoundIndex].items((song)=> {
+          if(song.data.currentTime() === song.data.duration()){ 
+            jumpSong('next');
+            song.data.play().setVolume(volumen);
+          }
+      })
+      }
       break;
 
       case playlist3:
@@ -223,7 +273,29 @@ function draw() {
           })
         }
         titulo = "Playlist 3"
+        if (currentPlaylist.length > 0) {
+          currentPlaylist[currentSoundIndex].items((song)=> {
+          rect(100,900,(song.data.currentTime()*(1720/song.data.duration())),30)
+        })
+      }
+  
+      if (currentPlaylist.length > 0) {
+        currentPlaylist[currentSoundIndex].items((song)=> {
+        reproduciendo.show(song.nombre,20)
+        reproduciendoArtista.show(song.artista,15)
+        avanceDeReproduccion.show(transformarSegundos(song.data.currentTime()) + "/" + transformarSegundos(song.data.duration()),19)
       
+      })
+      }
+  
+      if (currentPlaylist.length > 0) {
+        currentPlaylist[currentSoundIndex].items((song)=> {
+          if(song.data.currentTime() === song.data.duration()){ 
+            jumpSong('next');
+            song.data.play().setVolume(volumen);
+          }
+      })
+      }
       break;
   
   }
