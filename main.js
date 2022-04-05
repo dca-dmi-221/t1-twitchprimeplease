@@ -282,7 +282,7 @@ function draw() {
       break;
 
       case playlist3:
-        fill(242)
+        fill(242)c
         image(fondoYuri,0,0);
         if (currentPlaylist.length > 0) {
           playlist3.forEach(cancion => {
